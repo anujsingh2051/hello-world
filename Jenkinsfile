@@ -50,6 +50,14 @@ pipeline {
 
         }
 
+         stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('sonar') { // 'sonar' is the name of your SonarQube server in Jenkins
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+            }
+        }
+
 
 
         
