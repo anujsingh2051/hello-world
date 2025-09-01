@@ -49,33 +49,22 @@ pipeline {
             }
 
         }
+        stage('Code Analysis with SonarQube') {
+            environment {
+                SONARQUBE_SERVER = 'sonarqube' // Replace with your SonarQube installation name configured in Jenkins
+            }
+            steps {
+                withSonarQubeEnv(SONARQUBE_SERVER) {
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
         
 
     }
 
 
-    pipeline {
-    agent any 
-    
-    stages { 
-        stage('SCM Checkout') {
-            steps{
-           git branch: 'master', url: 'https://github.com/anujsingh2051/hello-world'
-            }
-        }
-        // run sonarqube test
-        stage('Run Sonarqube') {
-            environment {
-                scannerHome = tool 'lil-sonar-tool';
-            }
-            steps {
-              withSonarQubeEnv(credentialsId: 'gen-token', installationName: 'lil sonar installation') {
-                sh "${scannerHome}/bin/sonar-scanner"
-              }
-            }
-        }
-    }
-}
+   
 
 
 
