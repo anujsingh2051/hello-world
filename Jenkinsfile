@@ -4,13 +4,7 @@ pipeline {
 
 
 
-    environment {
-
-        MAVEN_HOME = '/usr/share/maven' // Path to Maven installation
-
-       
-
-    }
+    
 
 
 
